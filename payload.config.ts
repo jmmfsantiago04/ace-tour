@@ -22,6 +22,20 @@ export default buildConfig({
       autoGenerate: true,
     },
   },
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: '한국어',
+        code: 'ko',
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   collections: [Users, Media],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

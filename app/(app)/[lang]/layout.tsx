@@ -1,18 +1,30 @@
+import { Navbar } from '@/app/components/Navbar';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
 export async function generateStaticParams() {
     // Match the locales from your Payload config
     return [{ lang: 'en' }, { lang: 'ko' }]
 }
 
-export default async function RootLayout({
+interface LayoutProps {
+    children: React.ReactNode;
+    params: Promise<{ lang: string }>;
+}
+
+export default async function LocaleLayout({
     children,
-    params: { lang }
-}: {
-    children: React.ReactNode
-    params: { lang: string }
-}) {
+    params
+}: LayoutProps) {
+    const { lang } = await params;
+
     return (
         <html lang={lang}>
-            <body>{children}</body>
+            <body className={inter.className}>
+                <Navbar />
+                {children}
+            </body>
         </html>
     )
 } 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.6.0",
     "@payloadcms/db-postgres": "^3.28.1",
     "@payloadcms/next": "^3.28.1",
     "@payloadcms/payload-cloud": "^3.28.1",
@@ -18,6 +19,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "graphql": "^16.10.0",
+    "negotiator": "^1.0.0",
     "next": "15.2.2",
     "payload": "^3.28.1",
     "react": "^19.0.0",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

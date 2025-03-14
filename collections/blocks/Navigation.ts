@@ -20,6 +20,10 @@ export const Navigation: Block = {
             required: true,
             label: 'Menu Items',
             minRows: 1,
+            localized: true,
+            admin: {
+                description: 'Menu items will be localized based on the selected language',
+            },
             fields: [
                 {
                     name: 'label',
@@ -27,6 +31,9 @@ export const Navigation: Block = {
                     required: true,
                     label: 'Menu Label',
                     localized: true,
+                    admin: {
+                        description: 'The text that will appear in the menu (will be localized)',
+                    },
                 },
                 {
                     name: 'link',

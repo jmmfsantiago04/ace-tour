@@ -10,11 +10,24 @@ const Pages: CollectionConfig = {
     access: {
         read: () => true,
     },
+    versions: {
+        drafts: true,
+    },
     fields: [
         {
             name: 'title',
             type: 'text',
             required: true,
+            localized: true,
+            admin: {
+                description: 'Required for default locale (English)',
+            },
+            validate: (value, { locale }) => {
+                if (locale === 'en' && !value) {
+                    return 'Title is required for English';
+                }
+                return true;
+            },
         },
         {
             name: 'slug',
@@ -30,6 +43,7 @@ const Pages: CollectionConfig = {
             type: 'blocks',
             required: true,
             minRows: 1,
+            localized: true,
             blocks: [
                 Navigation,
                 Content,
@@ -38,6 +52,7 @@ const Pages: CollectionConfig = {
         {
             name: 'meta',
             type: 'group',
+            localized: true,
             fields: [
                 {
                     name: 'title',

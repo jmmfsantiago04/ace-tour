@@ -10,19 +10,20 @@ export async function generateStaticParams() {
 
 interface LayoutProps {
     children: React.ReactNode;
-    params: Promise<{ lang: string }>;
+    params: { lang: string };
 }
 
-export default async function LocaleLayout({
+export default function LocaleLayout({
     children,
-    params
+    params,
 }: LayoutProps) {
-    const { lang } = await params;
+    const { lang } = params;
+    console.log('Layout Language:', lang);
 
     return (
         <html lang={lang}>
             <body className={inter.className}>
-                <Navbar />
+                <Navbar lang={lang} />
                 {children}
             </body>
         </html>

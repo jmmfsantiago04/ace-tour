@@ -5,20 +5,22 @@ import { headers } from 'next/headers';
 import { unstable_noStore as noStore } from 'next/cache';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
-export async function Navbar() {
+interface NavbarProps {
+    lang: string;
+}
+
+export async function Navbar({ lang }: NavbarProps) {
     noStore(); // Disable caching for this component
-    const headersList = headers();
-    const url = new URL((await headersList).get('x-url') || 'http://localhost/en');
-    const pathname = url.pathname;
-    const lang = pathname.split('/')[1] as 'en' | 'ko' || 'en';
-    const currentPath = pathname.split('/').slice(2).join('/');
+
+    console.log('Current Language:', lang);
 
     if (!process.env.NEXT_PUBLIC_SERVER_URL) {
+        console.error('NEXT_PUBLIC_SERVER_URL is not defined');
         return (
             <nav className="bg-white shadow-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex-shrink-0 flex items-center">
+                    <div className="flex justify-between items-center h-16">
+                        <div className="flex-shrink-0">
                             <span className="text-xl font-bold">ACE Tour</span>
                         </div>
                         <LanguageSwitcher />
@@ -28,14 +30,16 @@ export async function Navbar() {
         );
     }
 
-    const navigation = await getNavigation(lang);
+    const navigation = await getNavigation(lang as 'en' | 'ko');
+    console.log('Navigation Data in Navbar:', JSON.stringify(navigation, null, 2));
 
     if (!navigation?.logo || !navigation?.menuItems) {
+        console.log('No navigation data available');
         return (
             <nav className="bg-white shadow-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex-shrink-0 flex items-center">
+                    <div className="flex justify-between items-center h-16">
+                        <div className="flex-shrink-0">
                             <span className="text-xl font-bold">ACE Tour</span>
                         </div>
                         <LanguageSwitcher />
@@ -48,8 +52,8 @@ export async function Navbar() {
     return (
         <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex-shrink-0 flex items-center">
+                <div className="flex justify-between items-center h-16">
+                    <div className="flex-shrink-0">
                         <Link href={`/${lang}`} prefetch={false}>
                             <Image
                                 src={navigation.logo.url}
@@ -61,8 +65,8 @@ export async function Navbar() {
                             />
                         </Link>
                     </div>
-                    <div className="flex items-center">
-                        <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <div className="flex-1 flex justify-center">
+                        <div className="hidden sm:flex sm:space-x-8">
                             {navigation.menuItems.map((item, index) => (
                                 <Link
                                     key={`${item.link}-${index}`}
@@ -74,6 +78,8 @@ export async function Navbar() {
                                 </Link>
                             ))}
                         </div>
+                    </div>
+                    <div className="flex items-center">
                         <LanguageSwitcher />
                         {/* Mobile menu button */}
                         <div className="sm:hidden ml-4">
@@ -109,6 +115,7 @@ export async function Navbar() {
                 <div className="px-2 pt-2 pb-3 space-y-1">
                     {navigation.menuItems.map((item, index) => {
                         if (!item.label) {
+                            console.log(`Missing label for mobile menu item ${index}:`, item);
                             return null;
                         }
                         return (

@@ -157,6 +157,9 @@ export interface Media {
  */
 export interface Page {
   id: number;
+  /**
+   * Required for default locale (English)
+   */
   title: string;
   /**
    * The URL-friendly slug for this page (e.g., "about-us")
@@ -165,7 +168,13 @@ export interface Page {
   layout: (
     | {
         logo: number | Media;
+        /**
+         * Menu items will be localized based on the selected language
+         */
         menuItems: {
+          /**
+           * The text that will appear in the menu (will be localized)
+           */
           label: string;
           /**
            * Use relative paths (e.g., "/about", "/services")
@@ -192,6 +201,7 @@ export interface Page {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -330,6 +340,7 @@ export interface PagesSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

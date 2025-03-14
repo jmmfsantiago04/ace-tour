@@ -222,6 +222,10 @@ export interface Page {
          * The main content text
          */
         content: string;
+        /**
+         * Additional content text (optional)
+         */
+        secondaryContent?: string | null;
         cards?:
           | {
               /**
@@ -388,6 +392,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               content?: T;
+              secondaryContent?: T;
               cards?:
                 | T
                 | {

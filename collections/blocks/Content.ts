@@ -28,6 +28,16 @@ export const Content: Block = {
             },
         },
         {
+            name: 'secondaryContent',
+            type: 'text',
+            required: false,
+            localized: true,
+            label: 'Secondary Content',
+            admin: {
+                description: 'Additional content text (optional)',
+            },
+        },
+        {
             name: 'cards',
             type: 'array',
             label: 'Cards',

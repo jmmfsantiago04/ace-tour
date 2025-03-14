@@ -8,16 +8,52 @@ export const Content: Block = {
     },
     fields: [
         {
-            name: 'heading',
+            name: 'title',
             type: 'text',
             required: true,
-            label: 'Heading',
+            localized: true,
+            label: 'Title',
+            admin: {
+                description: 'The main title of the content section',
+            },
         },
         {
-            name: 'paragraph',
-            type: 'textarea',
+            name: 'content',
+            type: 'text',
             required: true,
-            label: 'Paragraph',
+            localized: true,
+            label: 'Content',
+            admin: {
+                description: 'The main content text',
+            },
+        },
+        {
+            name: 'cards',
+            type: 'array',
+            label: 'Cards',
+            localized: true,
+            fields: [
+                {
+                    name: 'cardTitle',
+                    type: 'text',
+                    required: true,
+                    localized: true,
+                    label: 'Card Title',
+                    admin: {
+                        description: 'The title of the card',
+                    },
+                },
+                {
+                    name: 'cardContent',
+                    type: 'text',
+                    required: true,
+                    localized: true,
+                    label: 'Card Content',
+                    admin: {
+                        description: 'The content of the card',
+                    },
+                },
+            ],
         },
     ],
 }; 

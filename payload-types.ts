@@ -214,8 +214,27 @@ export interface Page {
         blockType: 'hero';
       }
     | {
-        heading: string;
-        paragraph: string;
+        /**
+         * The main title of the content section
+         */
+        title: string;
+        /**
+         * The main content text
+         */
+        content: string;
+        cards?:
+          | {
+              /**
+               * The title of the card
+               */
+              cardTitle: string;
+              /**
+               * The content of the card
+               */
+              cardContent: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'content';
@@ -367,8 +386,15 @@ export interface PagesSelect<T extends boolean = true> {
         content?:
           | T
           | {
-              heading?: T;
-              paragraph?: T;
+              title?: T;
+              content?: T;
+              cards?:
+                | T
+                | {
+                    cardTitle?: T;
+                    cardContent?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

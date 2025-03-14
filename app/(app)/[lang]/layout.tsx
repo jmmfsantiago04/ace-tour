@@ -1,7 +1,11 @@
 import { Navbar } from '@/app/components/Navbar';
 import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-inter',
+});
 
 export async function generateStaticParams() {
     // Match the locales from your Payload config
@@ -10,19 +14,19 @@ export async function generateStaticParams() {
 
 interface LayoutProps {
     children: React.ReactNode;
-    params: { lang: string };
+    params: Promise<{ lang: string }>;
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
     children,
     params,
 }: LayoutProps) {
-    const { lang } = params;
+    const { lang } = await params;
     console.log('Layout Language:', lang);
 
     return (
-        <html lang={lang}>
-            <body className={inter.className}>
+        <html lang={lang} className={inter.variable}>
+            <body className="font-sans">
                 <Navbar lang={lang} />
                 {children}
             </body>

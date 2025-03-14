@@ -187,6 +187,33 @@ export interface Page {
         blockType: 'navigation';
       }
     | {
+        /**
+         * The main heading of the hero section
+         */
+        title: string;
+        /**
+         * A brief description or tagline
+         */
+        subtitle?: string | null;
+        /**
+         * Text to be highlighted (e.g., "Western USA")
+         */
+        highlightedText?: string | null;
+        cta: {
+          /**
+           * Text for the CTA button
+           */
+          label: string;
+          /**
+           * Link for the CTA button (e.g., "/tours")
+           */
+          link: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
         heading: string;
         paragraph: string;
         id?: string | null;
@@ -318,6 +345,21 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     link?: T;
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        hero?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              highlightedText?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    link?: T;
                   };
               id?: T;
               blockName?: T;

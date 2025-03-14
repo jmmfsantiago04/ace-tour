@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload/types';
 import { Content } from './blocks/Content';
 import { Navigation } from './blocks/Navigation';
+import { Hero } from './blocks/Hero';
 
 const Pages: CollectionConfig = {
     slug: 'pages',
@@ -46,6 +47,7 @@ const Pages: CollectionConfig = {
             localized: true,
             blocks: [
                 Navigation,
+                Hero,
                 Content,
             ],
         },

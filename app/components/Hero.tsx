@@ -67,9 +67,9 @@ export function Hero({ title, subtitle, highlightedText, cta, lang }: HeroProps)
                 <div className="mx-auto w-full max-w-7xl">
                     <div className={`flex flex-col ${lang === 'ko' ? 'space-y-[70px]' : 'space-y-[25px]'}`}>
                         {/* Title container with exact dimensions */}
-                        <div className={`w-[756px] ${lang === 'ko' ? 'h-[112px]' : ''}`}>
+                        <div className={`w-full max-w-[756px] ${lang === 'ko' ? 'h-[112px]' : ''}`}>
                             <motion.h1
-                                className={`text-gray-900 text-[52px] font-semibold leading-[56px] tracking-[0px] ${lang === 'ko'
+                                className={`text-gray-900 text-[32px] sm:text-[40px] md:text-[52px] leading-[40px] sm:leading-[48px] md:leading-[56px] tracking-[0px] font-semibold ${lang === 'ko'
                                     ? 'h-full flex items-center'
                                     : 'flex flex-col gap-1 md:h-[168px] md:gap-2'
                                     }`}
@@ -124,7 +124,7 @@ export function Hero({ title, subtitle, highlightedText, cta, lang }: HeroProps)
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.2 }}
                                 >
-                                    <p className="flex h-full items-center text-base font-medium leading-6 tracking-[0%] text-gray-600">
+                                    <p className="flex h-full items-center text-sm sm:text-base font-medium leading-5 sm:leading-6 tracking-[0%] text-gray-600">
                                         {subtitle}
                                     </p>
                                 </motion.div>

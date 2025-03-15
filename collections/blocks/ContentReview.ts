@@ -1,10 +1,10 @@
 import type { Block } from 'payload/types';
 
-export const Content: Block = {
-    slug: 'content',
+export const ContentReview: Block = {
+    slug: 'content-review',
     labels: {
-        singular: 'Content',
-        plural: 'Content Blocks',
+        singular: 'Content Review',
+        plural: 'Content Review Blocks',
     },
     fields: [
         {
@@ -12,55 +12,62 @@ export const Content: Block = {
             type: 'text',
             required: true,
             localized: true,
-            label: 'Title',
+            label: 'Section Title',
             admin: {
-                description: 'The main title of the content section',
+                description: 'The main title of the reviews section',
             },
         },
         {
-            name: 'content',
-            type: 'text',
-            required: true,
-            localized: true,
-            label: 'Content',
-            admin: {
-                description: 'The main content text',
-            },
-        },
-        {
-            name: 'secondaryContent',
+            name: 'description',
             type: 'text',
             required: false,
             localized: true,
-            label: 'Secondary Content',
+            label: 'Section Description',
             admin: {
-                description: 'Additional content text (optional)',
+                description: 'A brief description of the reviews section (optional)',
             },
         },
         {
-            name: 'cards',
+            name: 'reviews',
             type: 'array',
-            label: 'Cards',
+            label: 'Review Cards',
             localized: true,
             fields: [
                 {
-                    name: 'cardTitle',
+                    name: 'reviewerInitial',
                     type: 'text',
                     required: true,
-                    localized: true,
-                    label: 'Card Title',
+                    label: 'Reviewer Initial',
                     admin: {
-                        description: 'The title of the card',
+                        description: 'The first letter/initial of the reviewer (e.g., K)',
                     },
                 },
                 {
-                    name: 'cardContent',
+                    name: 'reviewerName',
                     type: 'text',
                     required: true,
-                    localized: true,
-                    label: 'Card Content',
+                    label: 'Reviewer Name',
                     admin: {
-                        description: 'The content of the card',
+                        description: 'The name of the reviewer (e.g., Kim*mi)',
+                    },
+                },
+                {
+                    name: 'reviewText',
+                    type: 'textarea',
+                    required: true,
+                    localized: true,
+                    label: 'Review Text',
+                    admin: {
+                        description: 'The main review content (in Korean)',
+                    },
+                },
+                {
+                    name: 'readMoreLink',
+                    type: 'text',
+                    required: false,
+                    label: 'Read More Link',
+                    admin: {
+                        description: 'Link for the Read More button',
                     },
                 },
             ],

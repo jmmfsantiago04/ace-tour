@@ -239,9 +239,75 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * Add one or more call-to-action buttons
+         */
+        buttons?:
+          | {
+              /**
+               * Text for the button
+               */
+              label: string;
+              /**
+               * Link for the button (e.g., "/contact")
+               */
+              link: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'content';
+      }
+    | {
+        /**
+         * The main title of the reviews section
+         */
+        title: string;
+        /**
+         * A brief description of the reviews section (optional)
+         */
+        description?: string | null;
+        reviews?:
+          | {
+              /**
+               * The first letter/initial of the reviewer (e.g., K)
+               */
+              reviewerInitial: string;
+              /**
+               * The name of the reviewer (e.g., Kim*mi)
+               */
+              reviewerName: string;
+              /**
+               * The main review content (in Korean)
+               */
+              reviewText: string;
+              /**
+               * Link for the Read More button
+               */
+              readMoreLink?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Add one or more call-to-action buttons
+         */
+        buttons?:
+          | {
+              /**
+               * Text for the button
+               */
+              label: string;
+              /**
+               * Link for the button (e.g., "/contact")
+               */
+              link: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content-review';
       }
   )[];
   meta?: {
@@ -398,6 +464,37 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     cardTitle?: T;
                     cardContent?: T;
+                    id?: T;
+                  };
+              buttons?:
+                | T
+                | {
+                    label?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'content-review'?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              reviews?:
+                | T
+                | {
+                    reviewerInitial?: T;
+                    reviewerName?: T;
+                    reviewText?: T;
+                    readMoreLink?: T;
+                    id?: T;
+                  };
+              buttons?:
+                | T
+                | {
+                    label?: T;
+                    link?: T;
                     id?: T;
                   };
               id?: T;

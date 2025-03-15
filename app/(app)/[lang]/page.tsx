@@ -2,9 +2,11 @@ import { Metadata } from 'next';
 import { unstable_noStore as noStore } from 'next/cache';
 import { Hero } from '@/app/components/Hero';
 import { OurMission } from '@/app/components/OurMission';
+import { HowItWorks } from '@/app/components/HowItWorks';
 import { notFound } from 'next/navigation';
 import { getHeroBlock } from '@/app/actions/getHeroBlock';
 import { getOurMission } from '@/app/actions/getOurMission';
+import { getHowItWorks } from '@/app/actions/getHowItWorks';
 
 interface Props {
     params: Promise<{ lang: string }>;
@@ -71,9 +73,10 @@ export default async function HomePage({ params }: Props) {
 
     console.log('🏠 Rendering HomePage with language:', lang);
 
-    const [heroBlock, ourMissionBlock] = await Promise.all([
+    const [heroBlock, ourMissionBlock, howItWorksBlock] = await Promise.all([
         getHeroBlock(lang as 'en' | 'ko'),
-        getOurMission(lang as 'en' | 'ko')
+        getOurMission(lang as 'en' | 'ko'),
+        getHowItWorks(lang as 'en' | 'ko')
     ]);
 
     if (!heroBlock) {
@@ -107,6 +110,15 @@ export default async function HomePage({ params }: Props) {
                     content={ourMissionBlock.content}
                     secondaryContent={ourMissionBlock.secondaryContent}
                     cards={ourMissionBlock.cards}
+                    lang={lang}
+                />
+            )}
+            {howItWorksBlock && (
+                <HowItWorks
+                    title={howItWorksBlock.title}
+                    content={howItWorksBlock.content}
+                    secondaryContent={howItWorksBlock.secondaryContent}
+                    cards={howItWorksBlock.cards}
                     lang={lang}
                 />
             )}

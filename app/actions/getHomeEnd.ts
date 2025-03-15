@@ -13,11 +13,15 @@ interface ContentBlock {
         cardContent: string;
         id?: string | null;
     }[];
+    buttons?: {
+        label: string;
+        link: string;
+    }[];
 }
 
-export async function getHowItWorks(locale: 'en' | 'ko' = 'en'): Promise<ContentBlock | null> {
+export async function getHomeEnd(locale: 'en' | 'ko' = 'en'): Promise<ContentBlock | null> {
     noStore();
-    console.log('🔄 Fetching How It Works content for locale:', locale);
+    console.log('🏁 Fetching Home End content for locale:', locale);
 
     try {
         const response = await fetch(
@@ -33,7 +37,7 @@ export async function getHowItWorks(locale: 'en' | 'ko' = 'en'): Promise<Content
         );
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch How It Works content: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to fetch Home End content: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
@@ -57,31 +61,32 @@ export async function getHowItWorks(locale: 'en' | 'ko' = 'en'): Promise<Content
             });
         });
 
-        // Find the content block with blockName "How It Works" (case insensitive)
+        // Find the content block with blockName "Home End" (case insensitive)
         const contentBlock = data.docs[0].layout.find(
             (block: any) =>
                 block.blockType === 'content' &&
-                block.blockName?.toLowerCase() === 'how it works'
+                block.blockName?.toLowerCase() === 'home end'
         ) as ContentBlock | undefined;
 
         if (!contentBlock) {
-            console.log('❌ No How It Works content block found in layout');
-            console.log('💡 Make sure you have a content block with blockName "How It Works"');
+            console.log('❌ No Home End content block found in layout');
+            console.log('💡 Make sure you have a content block with blockName "Home End"');
             return null;
         }
 
         // Log the specific content block data for debugging
-        console.log(`📄 How It Works content block found for ${locale}:`, {
+        console.log(`📄 Home End content block found for ${locale}:`, {
             title: contentBlock.title,
             content: contentBlock.content,
             secondaryContent: contentBlock.secondaryContent,
             blockName: contentBlock.blockName,
-            cards: contentBlock.cards
+            cards: contentBlock.cards,
+            buttons: contentBlock.buttons
         });
 
         return contentBlock;
     } catch (error) {
-        console.error('❌ Error fetching How It Works content:', error);
+        console.error('❌ Error fetching Home End content:', error);
         return null;
     }
 } 

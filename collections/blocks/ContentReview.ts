@@ -10,7 +10,7 @@ export const ContentReview: Block = {
         {
             name: 'title',
             type: 'text',
-            required: true,
+            required: false,
             localized: true,
             label: 'Section Title',
             admin: {
@@ -32,11 +32,12 @@ export const ContentReview: Block = {
             type: 'array',
             label: 'Review Cards',
             localized: true,
+            required: false,
             fields: [
                 {
                     name: 'reviewerInitial',
                     type: 'text',
-                    required: true,
+                    required: false,
                     label: 'Reviewer Initial',
                     admin: {
                         description: 'The first letter/initial of the reviewer (e.g., K)',
@@ -45,7 +46,7 @@ export const ContentReview: Block = {
                 {
                     name: 'reviewerName',
                     type: 'text',
-                    required: true,
+                    required: false,
                     label: 'Reviewer Name',
                     admin: {
                         description: 'The name of the reviewer (e.g., Kim*mi)',
@@ -54,7 +55,7 @@ export const ContentReview: Block = {
                 {
                     name: 'reviewText',
                     type: 'textarea',
-                    required: true,
+                    required: false,
                     localized: true,
                     label: 'Review Text',
                     admin: {
@@ -77,6 +78,7 @@ export const ContentReview: Block = {
             type: 'array',
             label: 'Action Buttons',
             localized: true,
+            required: false,
             admin: {
                 description: 'Add one or more call-to-action buttons',
             },
@@ -84,7 +86,7 @@ export const ContentReview: Block = {
                 {
                     name: 'label',
                     type: 'text',
-                    required: true,
+                    required: false,
                     localized: true,
                     label: 'Button Label',
                     admin: {
@@ -94,7 +96,7 @@ export const ContentReview: Block = {
                 {
                     name: 'link',
                     type: 'text',
-                    required: true,
+                    required: false,
                     label: 'Button Link',
                     admin: {
                         description: 'Link for the button (e.g., "/contact")',

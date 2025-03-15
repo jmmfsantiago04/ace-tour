@@ -10,7 +10,7 @@ export const Content: Block = {
         {
             name: 'title',
             type: 'text',
-            required: true,
+            required: false,
             localized: true,
             label: 'Title',
             admin: {
@@ -20,7 +20,7 @@ export const Content: Block = {
         {
             name: 'content',
             type: 'text',
-            required: true,
+            required: false,
             localized: true,
             label: 'Content',
             admin: {
@@ -42,11 +42,12 @@ export const Content: Block = {
             type: 'array',
             label: 'Cards',
             localized: true,
+            required: false,
             fields: [
                 {
                     name: 'cardTitle',
                     type: 'text',
-                    required: true,
+                    required: false,
                     localized: true,
                     label: 'Card Title',
                     admin: {
@@ -56,7 +57,7 @@ export const Content: Block = {
                 {
                     name: 'cardContent',
                     type: 'text',
-                    required: true,
+                    required: false,
                     localized: true,
                     label: 'Card Content',
                     admin: {
@@ -70,6 +71,7 @@ export const Content: Block = {
             type: 'array',
             label: 'Action Buttons',
             localized: true,
+            required: false,
             admin: {
                 description: 'Add one or more call-to-action buttons',
             },
@@ -77,7 +79,7 @@ export const Content: Block = {
                 {
                     name: 'label',
                     type: 'text',
-                    required: true,
+                    required: false,
                     localized: true,
                     label: 'Button Label',
                     admin: {
@@ -87,7 +89,7 @@ export const Content: Block = {
                 {
                     name: 'link',
                     type: 'text',
-                    required: true,
+                    required: false,
                     label: 'Button Link',
                     admin: {
                         description: 'Link for the button (e.g., "/contact")',

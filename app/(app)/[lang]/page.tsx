@@ -4,11 +4,13 @@ import { Hero } from '@/app/components/Hero';
 import { OurMission } from '@/app/components/OurMission';
 import { HowItWorks } from '@/app/components/HowItWorks';
 import { UserStories } from '@/app/components/UserStories';
+import { HomeEnd } from '@/app/components/HomeEnd';
 import { notFound } from 'next/navigation';
 import { getHeroBlock } from '@/app/actions/getHeroBlock';
 import { getOurMission } from '@/app/actions/getOurMission';
 import { getHowItWorks } from '@/app/actions/getHowItWorks';
 import { getUserStories } from '@/app/actions/getUserStories';
+import { getHomeEnd } from '@/app/actions/getHomeEnd';
 
 interface Props {
     params: Promise<{ lang: string }>;
@@ -75,12 +77,31 @@ export default async function HomePage({ params }: Props) {
 
     console.log('🏠 Rendering HomePage with language:', lang);
 
-    const [heroBlock, ourMissionBlock, howItWorksBlock, userStoriesBlock] = await Promise.all([
+    const [heroBlock, ourMissionBlock, howItWorksBlock, userStoriesBlock, homeEndBlock] = await Promise.all([
         getHeroBlock(lang as 'en' | 'ko'),
         getOurMission(lang as 'en' | 'ko'),
         getHowItWorks(lang as 'en' | 'ko'),
-        getUserStories(lang as 'en' | 'ko')
+        getUserStories(lang as 'en' | 'ko'),
+        getHomeEnd(lang as 'en' | 'ko')
     ]);
+
+    // Debug logs for all blocks
+    console.log('🔍 Checking all blocks:');
+    console.log('Hero Block:', heroBlock ? '✅' : '❌');
+    console.log('Our Mission Block:', ourMissionBlock ? '✅' : '❌');
+    console.log('How It Works Block:', howItWorksBlock ? '✅' : '❌');
+    console.log('User Stories Block:', userStoriesBlock ? '✅' : '❌');
+    console.log('Home End Block:', homeEndBlock ? '✅' : '❌');
+
+    if (homeEndBlock) {
+        console.log('📦 Home End data:', {
+            title: homeEndBlock.title,
+            content: homeEndBlock.content,
+            secondaryContent: homeEndBlock.secondaryContent,
+            hasCards: Boolean(homeEndBlock.cards?.length),
+            hasButtons: Boolean(homeEndBlock.buttons?.length)
+        });
+    }
 
     if (!heroBlock) {
         console.log('❌ No hero block found');
@@ -132,6 +153,16 @@ export default async function HomePage({ params }: Props) {
                     reviews={userStoriesBlock.reviews}
                     buttons={userStoriesBlock.buttons}
                     lang={lang}
+                />
+            )}
+            {homeEndBlock && (
+                <HomeEnd
+                    title={homeEndBlock.title}
+                    content={homeEndBlock.content}
+                    secondaryContent={homeEndBlock.secondaryContent}
+                    cards={homeEndBlock.cards}
+                    buttons={homeEndBlock.buttons}
+                    lang={lang as 'en' | 'ko'}
                 />
             )}
         </main>

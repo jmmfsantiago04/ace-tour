@@ -7,6 +7,7 @@ interface ContentBlock {
     title: string;
     content: string;
     secondaryContent?: string;
+    blockName?: string;
     cards?: {
         cardTitle: string;
         cardContent: string;
@@ -43,20 +44,38 @@ export async function getOurMission(locale: 'en' | 'ko' = 'en'): Promise<Content
             return null;
         }
 
-        const contentBlock = data.docs[0].layout.find(
+        // Log all content blocks and their details for debugging
+        const contentBlocks = data.docs[0].layout.filter(
             (block: any) => block.blockType === 'content'
+        );
+
+        console.log('📋 Available content blocks:');
+        contentBlocks.forEach((block: any, index: number) => {
+            console.log(`Block ${index + 1}:`, {
+                title: block.title,
+                blockName: block.blockName
+            });
+        });
+
+        // Find the content block with blockName "Our Mission" (case insensitive)
+        const contentBlock = data.docs[0].layout.find(
+            (block: any) =>
+                block.blockType === 'content' &&
+                block.blockName?.toLowerCase() === 'our mission'
         ) as ContentBlock | undefined;
 
         if (!contentBlock) {
-            console.log('❌ No content block found in layout');
+            console.log('❌ No Our Mission content block found in layout');
+            console.log('💡 Make sure you have a content block with blockName "Our Mission"');
             return null;
         }
 
         // Log the specific content block data for debugging
-        console.log(`📄 Content block found for ${locale}:`, {
+        console.log(`📄 Our Mission content block found for ${locale}:`, {
             title: contentBlock.title,
             content: contentBlock.content,
             secondaryContent: contentBlock.secondaryContent,
+            blockName: contentBlock.blockName,
             cards: contentBlock.cards
         });
 

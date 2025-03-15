@@ -217,11 +217,11 @@ export interface Page {
         /**
          * The main title of the content section
          */
-        title: string;
+        title?: string | null;
         /**
          * The main content text
          */
-        content: string;
+        content?: string | null;
         /**
          * Additional content text (optional)
          */
@@ -231,11 +231,11 @@ export interface Page {
               /**
                * The title of the card
                */
-              cardTitle: string;
+              cardTitle?: string | null;
               /**
                * The content of the card
                */
-              cardContent: string;
+              cardContent?: string | null;
               id?: string | null;
             }[]
           | null;
@@ -247,11 +247,11 @@ export interface Page {
               /**
                * Text for the button
                */
-              label: string;
+              label?: string | null;
               /**
                * Link for the button (e.g., "/contact")
                */
-              link: string;
+              link?: string | null;
               id?: string | null;
             }[]
           | null;
@@ -263,7 +263,7 @@ export interface Page {
         /**
          * The main title of the reviews section
          */
-        title: string;
+        title?: string | null;
         /**
          * A brief description of the reviews section (optional)
          */
@@ -273,15 +273,15 @@ export interface Page {
               /**
                * The first letter/initial of the reviewer (e.g., K)
                */
-              reviewerInitial: string;
+              reviewerInitial?: string | null;
               /**
                * The name of the reviewer (e.g., Kim*mi)
                */
-              reviewerName: string;
+              reviewerName?: string | null;
               /**
                * The main review content (in Korean)
                */
-              reviewText: string;
+              reviewText?: string | null;
               /**
                * Link for the Read More button
                */
@@ -297,11 +297,11 @@ export interface Page {
               /**
                * Text for the button
                */
-              label: string;
+              label?: string | null;
               /**
                * Link for the button (e.g., "/contact")
                */
-              link: string;
+              link?: string | null;
               id?: string | null;
             }[]
           | null;

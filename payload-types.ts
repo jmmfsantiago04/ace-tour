@@ -309,6 +309,32 @@ export interface Page {
         blockName?: string | null;
         blockType: 'content-review';
       }
+    | {
+        blockName?: string | null;
+        cards?:
+          | {
+              /**
+               * The label that appears at the top of the card
+               */
+              label: string;
+              /**
+               * The date to display (e.g., "03.05.2025")
+               */
+              date: string;
+              /**
+               * The main text content of the card
+               */
+              content: string;
+              /**
+               * The image to display in the card (4:3 ratio recommended)
+               */
+              image: number | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockType: 'card-labeled';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -499,6 +525,21 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               id?: T;
               blockName?: T;
+            };
+        'card-labeled'?:
+          | T
+          | {
+              blockName?: T;
+              cards?:
+                | T
+                | {
+                    label?: T;
+                    date?: T;
+                    content?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
             };
       };
   meta?:

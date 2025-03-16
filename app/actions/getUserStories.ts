@@ -4,6 +4,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 interface ContentReviewBlock {
     blockType: 'content-review';
+    blockName?: string;
     title: string;
     description?: string;
     reviews: {
@@ -48,6 +49,19 @@ export async function getUserStories(locale: 'en' | 'ko' = 'en'): Promise<Conten
             return null;
         }
 
+        // Log all content-review blocks and their details for debugging
+        const contentReviewBlocks = data.docs[0].layout.filter(
+            (block: any) => block.blockType === 'content-review'
+        );
+
+        console.log('📋 Available content-review blocks:');
+        contentReviewBlocks.forEach((block: any, index: number) => {
+            console.log(`Block ${index + 1}:`, {
+                title: block.title,
+                blockName: block.blockName
+            });
+        });
+
         // Find the content-review block with title containing "user stories" (case insensitive)
         const contentReviewBlock = data.docs[0].layout.find(
             (block: any) =>
@@ -57,6 +71,7 @@ export async function getUserStories(locale: 'en' | 'ko' = 'en'): Promise<Conten
 
         if (!contentReviewBlock) {
             console.log('❌ No User Stories block found in layout');
+            console.log('💡 Make sure you have a content-review block with title containing "User Stories"');
             return null;
         }
 
@@ -64,6 +79,7 @@ export async function getUserStories(locale: 'en' | 'ko' = 'en'): Promise<Conten
         console.log(`📄 User Stories block found for ${locale}:`, {
             title: contentReviewBlock.title,
             description: contentReviewBlock.description,
+            blockName: contentReviewBlock.blockName,
             reviews: contentReviewBlock.reviews,
             buttons: contentReviewBlock.buttons
         });

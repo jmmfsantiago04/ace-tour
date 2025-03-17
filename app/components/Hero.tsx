@@ -63,15 +63,15 @@ export function Hero({ title, subtitle, highlightedText, cta, lang }: HeroProps)
     return (
         <section className="relative h-screen w-full overflow-hidden bg-white">
             {/* Content */}
-            <div className="relative z-10 flex h-full pt-[55px] px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 flex h-full pt-[3.4375rem] px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto w-full max-w-7xl">
-                    <div className={`flex flex-col ${lang === 'ko' ? 'space-y-[70px]' : 'space-y-[25px]'}`}>
+                    <div className={`flex flex-col ${lang === 'ko' ? 'space-y-[4.375rem]' : 'space-y-[1.5625rem]'}`}>
                         {/* Title container with exact dimensions */}
-                        <div className={`w-full max-w-[756px] ${lang === 'ko' ? 'h-[112px]' : ''}`}>
+                        <div className={`w-full max-w-[47.25rem] ${lang === 'ko' ? 'h-[7rem]' : ''}`}>
                             <motion.h1
-                                className={`text-gray-900 text-[32px] sm:text-[40px] md:text-[52px] leading-[40px] sm:leading-[48px] md:leading-[56px] tracking-[0px] font-semibold ${lang === 'ko'
+                                className={`text-gray-900 text-[2rem] sm:text-[2.5rem] md:text-[3.25rem] leading-[2.5rem] sm:leading-[3rem] md:leading-[3.5rem] tracking-[0] font-semibold ${lang === 'ko'
                                     ? 'h-full flex items-center'
-                                    : 'flex flex-col gap-1 md:h-[168px] md:gap-2'
+                                    : 'flex flex-col gap-1 md:h-[10.5rem] md:gap-2'
                                     }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -92,9 +92,9 @@ export function Hero({ title, subtitle, highlightedText, cta, lang }: HeroProps)
                             >
                                 <Link
                                     href={`/${lang}${cta.link}`}
-                                    className="group inline-flex h-[48px] w-[251px] items-center justify-between rounded-lg bg-[#1976D2] pl-5 pr-1 text-white transition-all hover:bg-[#1565C0]"
+                                    className="group inline-flex h-[3rem] w-[15.6875rem] items-center justify-between rounded-lg bg-[#1976D2] pl-5 pr-1 text-white transition-all hover:bg-[#1565C0]"
                                 >
-                                    <span className="text-base font-medium leading-6 tracking-[0%]">{cta.label}</span>
+                                    <span className="text-base font-medium leading-6 tracking-[0]">{cta.label}</span>
                                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white">
                                         <svg
                                             className="h-5 w-5 transform text-[#1976D2] transition-transform duration-200 group-hover:translate-x-1"
@@ -119,12 +119,12 @@ export function Hero({ title, subtitle, highlightedText, cta, lang }: HeroProps)
                             {/* Subtitle with exact dimensions */}
                             {subtitle && (
                                 <motion.div
-                                    className="w-full md:h-[53px] md:w-[361px] md:ml-auto"
+                                    className="w-full md:h-[3.3125rem] md:w-[22.5625rem] md:ml-auto"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.2 }}
                                 >
-                                    <p className="flex h-full items-center text-sm sm:text-base font-medium leading-5 sm:leading-6 tracking-[0%] text-gray-600">
+                                    <p className="flex h-full items-center text-sm sm:text-base font-medium leading-5 sm:leading-6 tracking-[0] text-gray-600">
                                         {subtitle}
                                     </p>
                                 </motion.div>

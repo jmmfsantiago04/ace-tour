@@ -19,32 +19,35 @@ export function FAQ({ title, content, secondaryContent, cards, lang }: FAQProps)
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
-        <section className="relative flex justify-center w-full px-4 sm:px-6 lg:px-8 bg-[#F5F9FF]">
-            <div className="relative w-full max-w-7xl py-16 sm:py-20 lg:py-24">
+        <section className="relative flex justify-center w-full px-3 xs:px-4 sm:px-6 lg:px-8 bg-[#F5F9FF]">
+            <div className="relative w-full max-w-7xl py-12 xs:py-16 sm:py-20 lg:py-24">
                 {/* Title Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className={`text-center ${lang === 'ko' ? 'mb-[40px]' : 'mb-12 sm:mb-16'}`}
+                    className={`text-center ${lang === 'ko' ? 'mb-[2rem] xs:mb-[2.5rem]' : 'mb-8 xs:mb-12 sm:mb-16'}`}
                 >
-                    <div className="inline-flex items-center justify-center w-[264px] h-[40px] gap-[8px] rounded-[22px] border border-[#F6B600] p-[8px] mb-4 sm:mb-6 bg-[#FFF8F0]">
-                        <span className="text-sm font-medium text-[#F6B600]">
+                    <div className="inline-flex items-center justify-center w-full max-w-[16.5rem] min-h-[2.5rem] gap-[0.5rem] rounded-[1.375rem] border border-[#F6B600] p-[0.5rem] mb-3 xs:mb-4 sm:mb-6 bg-[#FFF8F0]">
+                        <span className="text-xs xs:text-sm font-medium text-[#F6B600] px-2">
                             {title}
                         </span>
                     </div>
-                    <div className={`mx-auto px-4 sm:px-0 ${lang === 'en' ? 'w-full sm:w-[900px] lg:w-[974px] h-auto sm:h-[96px] lg:h-[112px]' : 'w-full sm:w-[600px] md:w-[796px] h-auto sm:h-[80px] md:h-[96px]'}`}>
+                    <div className={`mx-auto px-3 xs:px-4 sm:px-0 ${lang === 'en'
+                        ? 'w-full sm:w-[90%] lg:w-[60.875rem] h-auto sm:h-auto lg:h-auto'
+                        : 'w-full sm:w-[90%] md:w-[49.75rem] h-auto'
+                        }`}>
                         <h2 className={`font-semibold text-center text-gray-900 ${lang === 'en'
-                            ? 'text-[32px] sm:text-[32px] lg:text-[52px] leading-[36px] sm:leading-[46px] lg:leading-[56px]'
-                            : 'text-[24px] sm:text-[32px] md:text-[40px] leading-[32px] sm:leading-[40px] md:leading-[48px]'
-                            } tracking-[0px]`}>
+                            ? 'text-[1.5rem] xs:text-[1.75rem] sm:text-[2rem] lg:text-[3.25rem] leading-[1.2] sm:leading-[1.3] lg:leading-[1.1]'
+                            : 'text-[1.25rem] xs:text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] leading-[1.2] sm:leading-[1.25] md:leading-[1.2]'
+                            } tracking-[0] break-words`}>
                             {content}
                         </h2>
                     </div>
                 </motion.div>
 
                 {/* FAQ Cards */}
-                <div className="flex flex-col space-y-[20px] max-w-[758px] mx-auto">
+                <div className="flex flex-col space-y-[1rem] sm:space-y-[1.25rem] max-w-[47.375rem] mx-auto px-3 xs:px-4 sm:px-6 lg:px-0">
                     {cards?.map((card, index) => (
                         <motion.div
                             key={card.id || index}
@@ -55,14 +58,14 @@ export function FAQ({ title, content, secondaryContent, cards, lang }: FAQProps)
                         >
                             <button
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="flex items-center justify-between w-full h-[80px] pt-[24px] pr-[16px] pb-[24px] pl-[16px] bg-white rounded-[22px] text-left hover:bg-gray-50 transition-colors border border-[#E5E7EB] gap-[20px]"
+                                className="flex items-center justify-between w-full min-h-[4rem] xs:min-h-[5rem] py-[1rem] xs:py-[1.5rem] px-[0.75rem] xs:px-[1rem] bg-white rounded-[1rem] xs:rounded-[1.375rem] text-left hover:bg-gray-50 transition-colors border border-[#E5E7EB] gap-[0.75rem] xs:gap-[1.25rem]"
                             >
-                                <span className="text-[16px] font-medium leading-[24px] tracking-[0%] text-[#262626]">
+                                <span className="text-[0.875rem] xs:text-[1rem] font-medium leading-[1.4] xs:leading-[1.5] tracking-[0%] text-[#262626]">
                                     {card.cardTitle}
                                 </span>
-                                <span className="flex-shrink-0 ml-4">
+                                <span className="flex-shrink-0">
                                     <motion.div
-                                        className="flex items-center justify-center w-[32px] h-[32px] rounded-full bg-[#1976D2]"
+                                        className="flex items-center justify-center w-[1.75rem] h-[1.75rem] xs:w-[2rem] xs:h-[2rem] rounded-full bg-[#1976D2]"
                                     >
                                         <motion.svg
                                             width="10"
@@ -91,10 +94,10 @@ export function FAQ({ title, content, secondaryContent, cards, lang }: FAQProps)
                                     opacity: openIndex === index ? 1 : 0
                                 }}
                                 transition={{ duration: 0.3 }}
-                                className="overflow-hidden bg-white rounded-b-[20px]"
+                                className="overflow-hidden bg-white rounded-b-[1rem] xs:rounded-b-[1.25rem]"
                             >
-                                <div className="p-6 pt-0">
-                                    <p className="text-[14px] sm:text-[16px] text-[#262626]/80 leading-[1.6]">
+                                <div className="p-4 xs:p-6 pt-0">
+                                    <p className="text-[0.8125rem] xs:text-[0.875rem] sm:text-[1rem] text-[#262626]/80 leading-[1.6]">
                                         {card.cardContent}
                                     </p>
                                 </div>

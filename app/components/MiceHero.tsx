@@ -40,15 +40,15 @@ export function MiceHero({ title, content, secondaryContent, cards, buttons, lan
                     {/* Title */}
                     {lang === 'en' ? (
                         // English Title Layout
-                        <div className="relative mx-auto w-full lg:w-[803px] h-auto lg:h-[168px] mt-[20px] mb-[120px]">
-                            <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold text-[#262626] leading-[1.2] sm:leading-[1.3] md:leading-[1.3] lg:leading-[56px] tracking-[0px] text-center lg:absolute lg:left-0 lg:right-0 lg:px-0">
+                        <div className="relative mx-auto w-full lg:w-[50.1875rem] h-auto lg:h-[10.5rem] mt-[1.25rem] mb-[7.5rem]">
+                            <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.25rem] font-bold text-[#262626] leading-[1.2] sm:leading-[1.3] md:leading-[1.3] lg:leading-[3.5rem] tracking-[0] text-center lg:absolute lg:left-0 lg:right-0 lg:px-0">
                                 {title}
                             </h1>
                         </div>
                     ) : (
                         // Korean Title Layout
-                        <div className="relative mx-auto mt-[40px] mb-[120px]">
-                            <h1 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold text-[#262626] leading-[1.4] sm:leading-[1.4] md:leading-[1.4] lg:leading-[72px] tracking-[0px] text-center max-w-[280px] sm:max-w-[600px] lg:max-w-[920px] mx-auto px-4">
+                        <div className="relative mx-auto mt-[2.5rem] mb-[7.5rem]">
+                            <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.25rem] font-bold text-[#262626] leading-[1.4] sm:leading-[1.4] md:leading-[1.4] lg:leading-[4.5rem] tracking-[0] text-center max-w-[17.5rem] sm:max-w-[37.5rem] lg:max-w-[57.5rem] mx-auto px-4">
                                 {title}
                             </h1>
                         </div>
@@ -56,19 +56,19 @@ export function MiceHero({ title, content, secondaryContent, cards, buttons, lan
 
                     {/* Statistics Cards */}
                     {cards && cards.length > 0 && (
-                        <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-[50px] max-w-[348px] sm:max-w-[720px] lg:max-w-[1112px] mx-auto">
+                        <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-[3.125rem] max-w-[21.75rem] sm:max-w-[45rem] lg:max-w-[69.5rem] mx-auto">
                             {cards.map((card, index) => (
                                 <motion.div
                                     key={card.id || index}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="flex flex-col items-center w-full sm:w-[348px] min-h-[140px] sm:h-[155px] gap-3 sm:gap-4"
+                                    className="flex flex-col items-center w-full sm:w-[21.75rem] min-h-[8.75rem] sm:h-[9.6875rem] gap-3 sm:gap-4"
                                 >
-                                    <span className="gradient-text text-[36px] sm:text-[44px] lg:text-[56px] font-bold">
+                                    <span className="gradient-text text-[2.25rem] sm:text-[2.75rem] lg:text-[3.5rem] font-bold">
                                         {card.cardTitle}
                                     </span>
-                                    <p className="text-[16px] sm:text-[18px] lg:text-[20px] font-medium leading-[24px] sm:leading-[26px] lg:leading-[28px] tracking-[0%] text-center align-middle text-[#262626] max-w-full sm:max-w-[348px] px-4 sm:px-0">
+                                    <p className="text-[1rem] sm:text-[1.125rem] lg:text-[1.25rem] font-medium leading-[1.5rem] sm:leading-[1.625rem] lg:leading-[1.75rem] tracking-[0] text-center align-middle text-[#262626] max-w-full sm:max-w-[21.75rem] px-4 sm:px-0">
                                         {card.cardContent}
                                     </p>
                                 </motion.div>

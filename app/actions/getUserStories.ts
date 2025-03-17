@@ -62,16 +62,16 @@ export async function getUserStories(locale: 'en' | 'ko' = 'en'): Promise<Conten
             });
         });
 
-        // Find the content-review block with title containing "user stories" (case insensitive)
+        // Find the content-review block with blockName "User Stories" (case insensitive)
         const contentReviewBlock = data.docs[0].layout.find(
             (block: any) =>
                 block.blockType === 'content-review' &&
-                block.title.toLowerCase().includes('user stories')
+                block.blockName?.toLowerCase() === 'user stories'
         ) as ContentReviewBlock | undefined;
 
         if (!contentReviewBlock) {
             console.log('❌ No User Stories block found in layout');
-            console.log('💡 Make sure you have a content-review block with title containing "User Stories"');
+            console.log('💡 Make sure you have a content-review block with blockName containing "User Stories"');
             return null;
         }
 

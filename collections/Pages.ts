@@ -4,6 +4,7 @@ import { Navigation } from './blocks/Navigation';
 import { Hero } from './blocks/Hero';
 import { ContentReview } from './blocks/ContentReview';
 import { CardLabeled } from './blocks/CardLabeled';
+import { BasicContent } from './blocks/BasicContent';
 
 const Pages: CollectionConfig = {
     slug: 'pages',
@@ -53,6 +54,7 @@ const Pages: CollectionConfig = {
                 Content,
                 ContentReview,
                 CardLabeled,
+                BasicContent,
             ],
         },
         {

@@ -1,20 +1,40 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { getOurMission } from '../actions/getOurMission';
 
 interface OurMissionProps {
-    title: string;
-    content: string;
-    secondaryContent?: string;
-    cards?: {
-        cardTitle: string;
-        cardContent: string;
-        id?: string | null;
-    }[];
     lang: string;
 }
 
-export function OurMission({ title, content, secondaryContent, cards, lang }: OurMissionProps) {
+export function OurMission({ lang }: OurMissionProps) {
+    const [missionData, setMissionData] = useState<{
+        title: string;
+        content: string;
+        secondaryContent?: string | null;
+        cards?: {
+            cardTitle: string;
+            cardContent: string;
+            id?: string | null;
+        }[];
+    } | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getOurMission(lang as 'en' | 'ko');
+            if (data) {
+                setMissionData(data);
+            }
+        };
+
+        fetchData();
+    }, [lang]);
+
+    if (!missionData) {
+        return null; // or a loading state
+    }
+
     // Function to add line break after "and"
     const formatContent = (text: string) => {
         return text.split(' and ').map((part, index, array) => (
@@ -42,25 +62,25 @@ export function OurMission({ title, content, secondaryContent, cards, lang }: Ou
                 >
                     <div className="inline-flex items-center justify-center w-[16.5rem] h-[2.5rem] gap-[0.5rem] rounded-[1.375rem] border border-[#F6B600] p-[0.5rem] mb-4 sm:mb-6 bg-[#F6B600]/10">
                         <span className="text-sm font-medium text-[#F6B600]">
-                            {title}
+                            {missionData.title}
                         </span>
                     </div>
                     <div className="w-full sm:w-[37.5rem] md:w-[49.75rem] h-auto sm:h-[5rem] md:h-[6rem] mx-auto px-4 sm:px-0">
                         <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] leading-[2rem] sm:leading-[2.5rem] md:leading-[3rem] tracking-[0] font-semibold text-gray-900 text-center">
-                            {formatContent(content)}
+                            {formatContent(missionData.content)}
                         </h2>
                     </div>
-                    {secondaryContent && (
+                    {missionData.secondaryContent && (
                         <p className="text-[#262626] w-full sm:w-[37.5rem] md:w-[49.75rem] mx-auto text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] leading-[1.5rem] sm:leading-[1.75rem] md:leading-[2rem] tracking-[0] font-normal text-center mt-4 sm:mt-6">
-                            {secondaryContent}
+                            {missionData.secondaryContent}
                         </p>
                     )}
                 </motion.div>
 
                 {/* Cards Grid */}
-                {cards && cards.length > 0 && (
+                {missionData.cards && missionData.cards.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
-                        {cards.map((card, index) => (
+                        {missionData.cards.map((card, index) => (
                             <motion.div
                                 key={card.id || index}
                                 initial={{ opacity: 0, y: 20 }}

@@ -335,6 +335,52 @@ export interface Page {
         id?: string | null;
         blockType: 'card-labeled';
       }
+    | {
+        /**
+         * The main title of the content section
+         */
+        title: string;
+        /**
+         * The main content text
+         */
+        content?: string | null;
+        /**
+         * Additional content text (optional)
+         */
+        secondaryContent?: string | null;
+        cards?:
+          | {
+              /**
+               * The title of the card
+               */
+              cardTitle?: string | null;
+              /**
+               * The content of the card
+               */
+              cardContent?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Add one or more call-to-action buttons
+         */
+        buttons?:
+          | {
+              /**
+               * Text for the button
+               */
+              label?: string | null;
+              /**
+               * Link for the button (e.g., "/contact")
+               */
+              link?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'basic-content';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -540,6 +586,29 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               id?: T;
+            };
+        'basic-content'?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              secondaryContent?: T;
+              cards?:
+                | T
+                | {
+                    cardTitle?: T;
+                    cardContent?: T;
+                    id?: T;
+                  };
+              buttons?:
+                | T
+                | {
+                    label?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
             };
       };
   meta?:

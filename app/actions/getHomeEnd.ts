@@ -24,8 +24,11 @@ export async function getHomeEnd(locale: 'en' | 'ko' = 'en'): Promise<ContentBlo
     console.log('🏁 Fetching Home End content for locale:', locale);
 
     try {
+        const apiUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[slug][equals]=/home&depth=2&locale=${locale}&draft=false`;
+        console.log('🌐 API URL:', apiUrl);
+
         const response = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/api/pages?where[layout.blockType][equals]=content&depth=2&locale=${locale}&draft=false`,
+            apiUrl,
             {
                 next: { revalidate: 0 },
                 cache: 'no-store',
@@ -37,6 +40,11 @@ export async function getHomeEnd(locale: 'en' | 'ko' = 'en'): Promise<ContentBlo
         );
 
         if (!response.ok) {
+            console.error('❌ API Response not OK:', {
+                status: response.status,
+                statusText: response.statusText,
+                headers: Object.fromEntries(response.headers.entries())
+            });
             throw new Error(`Failed to fetch Home End content: ${response.status} ${response.statusText}`);
         }
 
@@ -44,28 +52,35 @@ export async function getHomeEnd(locale: 'en' | 'ko' = 'en'): Promise<ContentBlo
         console.log('📥 Raw API Response:', JSON.stringify(data, null, 2));
 
         if (!data?.docs?.[0]?.layout) {
-            console.log('❌ No layout found in API response');
+            console.log('❌ No layout found in API response. Response structure:', {
+                hasData: !!data,
+                hasDocs: !!data?.docs,
+                docsLength: data?.docs?.length,
+                firstDoc: data?.docs?.[0]
+            });
             return null;
         }
 
-        // Log all content blocks and their details for debugging
-        const contentBlocks = data.docs[0].layout.filter(
-            (block: any) => block.blockType === 'content'
-        );
-
-        console.log('📋 Available content blocks:');
-        contentBlocks.forEach((block: any, index: number) => {
-            console.log(`Block ${index + 1}:`, {
-                title: block.title,
-                blockName: block.blockName
-            });
-        });
+        // Log the entire layout structure
+        console.log('📋 Full layout structure:', JSON.stringify(data.docs[0].layout.map((block: any) => ({
+            blockType: block.blockType,
+            blockName: block.blockName,
+            title: block.title
+        })), null, 2));
 
         // Find the content block with blockName "Home End" (case insensitive)
         const contentBlock = data.docs[0].layout.find(
-            (block: any) =>
-                block.blockType === 'content' &&
-                block.blockName?.toLowerCase() === 'home end'
+            (block: any) => {
+                const isContent = block.blockType === 'content';
+                const hasMatchingName = block.blockName?.toLowerCase() === 'home end';
+                console.log('Checking block:', {
+                    blockName: block.blockName,
+                    blockType: block.blockType,
+                    isContent,
+                    hasMatchingName
+                });
+                return isContent && hasMatchingName;
+            }
         ) as ContentBlock | undefined;
 
         if (!contentBlock) {
@@ -74,14 +89,13 @@ export async function getHomeEnd(locale: 'en' | 'ko' = 'en'): Promise<ContentBlo
             return null;
         }
 
-        // Log the specific content block data for debugging
-        console.log(`📄 Home End content block found for ${locale}:`, {
+        console.log(`✅ Home End content block found for ${locale}:`, {
             title: contentBlock.title,
             content: contentBlock.content,
             secondaryContent: contentBlock.secondaryContent,
             blockName: contentBlock.blockName,
-            cards: contentBlock.cards,
-            buttons: contentBlock.buttons
+            cardsCount: contentBlock.cards?.length,
+            buttonsCount: contentBlock.buttons?.length
         });
 
         return contentBlock;

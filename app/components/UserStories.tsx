@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion, useAnimationControls } from 'framer-motion';
-import { useEffect } from 'react';
+
 
 interface UserStoriesProps {
     title: string;

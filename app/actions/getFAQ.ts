@@ -19,9 +19,9 @@ interface ContentBlock {
     }[];
 }
 
-export async function getMiceHero(locale: 'en' | 'ko' = 'en'): Promise<ContentBlock | null> {
+export async function getFAQ(locale: 'en' | 'ko' = 'en'): Promise<ContentBlock | null> {
     noStore();
-    console.log('🎯 Fetching Mice Hero content for locale:', locale);
+    console.log('❓ Fetching FAQ content for locale:', locale);
 
     try {
         const response = await fetch(
@@ -37,7 +37,7 @@ export async function getMiceHero(locale: 'en' | 'ko' = 'en'): Promise<ContentBl
         );
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch Mice Hero content: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to fetch FAQ content: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
@@ -56,27 +56,26 @@ export async function getMiceHero(locale: 'en' | 'ko' = 'en'): Promise<ContentBl
         console.log('📋 Available content blocks:');
         contentBlocks.forEach((block: any, index: number) => {
             console.log(`Block ${index + 1}:`, {
-                blockType: block.blockType,
-                blockName: block.blockName,
-                normalizedBlockName: block.blockName?.toLowerCase().replace(/\s+/g, '')
+                title: block.title,
+                blockName: block.blockName
             });
         });
 
-        // Find the content block with blockName "Mice Hero" (case insensitive)
+        // Find the content block with blockName "FAQ" (case insensitive)
         const contentBlock = data.docs[0].layout.find(
             (block: any) =>
                 block.blockType === 'content' &&
-                block.blockName?.toLowerCase().replace(/\s+/g, '') === 'micehero'
+                block.blockName?.toLowerCase() === 'faq'
         ) as ContentBlock | undefined;
 
         if (!contentBlock) {
-            console.log('❌ No Mice Hero content block found in layout');
-            console.log('💡 Make sure you have a content block with blockName "Mice Hero"');
+            console.log('❌ No FAQ content block found in layout');
+            console.log('💡 Make sure you have a content block with blockName "FAQ"');
             return null;
         }
 
         // Log the specific content block data for debugging
-        console.log(`📄 Mice Hero content block found for ${locale}:`, {
+        console.log(`📄 FAQ content block found for ${locale}:`, {
             title: contentBlock.title,
             content: contentBlock.content,
             secondaryContent: contentBlock.secondaryContent,
@@ -87,7 +86,7 @@ export async function getMiceHero(locale: 'en' | 'ko' = 'en'): Promise<ContentBl
 
         return contentBlock;
     } catch (error) {
-        console.error('❌ Error fetching Mice Hero content:', error);
+        console.error('❌ Error fetching FAQ content:', error);
         return null;
     }
 } 
